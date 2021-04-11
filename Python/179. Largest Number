@@ -1,0 +1,20 @@
+class Solution(object):
+    def largestNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: str
+        """
+        # nums = [str(s) for s in nums]
+        # for i in range(len(nums)-1):
+        #     for j in range(i+1,len(nums)):
+        #         if int(nums[i]+nums[j]) < int(nums[j] + nums[i]):
+        #             nums[i], nums[j] = nums[j], nums[i]
+        # ans = "".join(nums)
+        # return "0" if ans[0] == "0" else ans
+
+        from functools import cmp_to_key 
+        cmp_key = cmp_to_key(lambda a, b : int(b+a) - int(a+b))
+        nums = list(map(str, nums))
+        nums.sort(key = cmp_key)
+        res = "".join(nums)
+        return "0" if res[0] == "0" else res
